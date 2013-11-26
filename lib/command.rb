@@ -19,6 +19,8 @@ class Command
     @status && @status.exitstatus
   end
 
+  alias_method :status, :exitstatus
+
   def success?
     @status && @status.success?
   end
