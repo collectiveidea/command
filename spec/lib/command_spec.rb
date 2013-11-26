@@ -80,5 +80,9 @@ describe Command do
         command.pid
       }.from(nil).to(status.pid)
     end
+
+    it "returns the command" do
+      expect(command.run).to eq(command)
+    end
   end
 end

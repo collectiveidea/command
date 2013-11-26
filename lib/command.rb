@@ -13,6 +13,7 @@ class Command
 
   def run
     @stdout, @stderr, @status = Open3.capture3(stdin)
+    self
   end
 
   def exitstatus
