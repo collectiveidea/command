@@ -1,5 +1,11 @@
 # Command
 
+[![Gem Version](https://badge.fury.io/rb/command.png)](http://badge.fury.io/rb/command)
+[![Build Status](https://travis-ci.org/collectiveidea/command.png?branch=master)](https://travis-ci.org/collectiveidea/command)
+[![Code Climate](https://codeclimate.com/github/collectiveidea/command.png)](https://codeclimate.com/github/collectiveidea/command)
+[![Coverage Status](https://coveralls.io/repos/collectiveidea/command/badge.png?branch=master)](https://coveralls.io/r/collectiveidea/command?branch=master)
+[![Dependency Status](https://gemnasium.com/collectiveidea/command.png)](https://gemnasium.com/collectiveidea/command)
+
 In Ruby, there are plenty of ways to run simple commands:
 
 * `` `date` ``
