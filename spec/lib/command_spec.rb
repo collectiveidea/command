@@ -57,11 +57,11 @@ describe Command do
       }.from(nil).to(stdout)
     end
 
-    it "sets the status" do
+    it "sets the exit status" do
       expect {
         command.run
       }.to change {
-        command.status
+        command.exitstatus
       }.from(nil).to(status.exitstatus)
     end
 
