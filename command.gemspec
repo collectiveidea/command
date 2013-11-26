@@ -1,20 +1,19 @@
-# coding: utf-8
+# encoding: utf-8
 
 Gem::Specification.new do |spec|
-  spec.name          = "command"
-  spec.version       = "0.0.1"
-  spec.authors       = ["Steve Richert"]
-  spec.email         = ["steve.richert@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = ""
-  spec.license       = "MIT"
+  spec.name    = "command"
+  spec.version = "0.0.1"
 
-  spec.files         = `git ls-files`.split($/)
-  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
-  spec.require_paths = ["lib"]
+  spec.author      = "Steve Richert"
+  spec.email       = "steve.richert@gmail.com"
+  spec.description = "Command provides a simple object-oriented interface for running shell commands from Ruby."
+  spec.summary     = "An object-oriented approach to shelling out"
+  spec.homepage    = "https://github.com/collectiveidea/command"
+  spec.license     = "MIT"
+
+  spec.files      = `git ls-files`.split($/)
+  spec.test_files = spec.files.grep(/^spec/)
 
   spec.add_development_dependency "bundler", "~> 1.3"
-  spec.add_development_dependency "rake"
+  spec.add_development_dependency "rake", "~> 10.1"
 end
