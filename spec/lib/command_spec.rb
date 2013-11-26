@@ -28,7 +28,7 @@ describe Command do
     let!(:command) { Command.new(stdin) }
     let(:stdout) { double(:stdout) }
     let(:stderr) { double(:stderr) }
-    let(:status) { double(:status, exitstatus: 1, success?: false) }
+    let(:status) { double(:status, exitstatus: 1, success?: false, pid: 123) }
     let(:result) { [stdout, stderr, status] }
 
     before do
@@ -71,6 +71,14 @@ describe Command do
       }.to change {
         command.success?
       }.from(nil).to(status.success?)
+    end
+
+    it "sets the PID" do
+      expect {
+        command.run
+      }.to change {
+        command.pid
+      }.from(nil).to(status.pid)
     end
   end
 end

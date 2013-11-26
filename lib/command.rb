@@ -22,4 +22,8 @@ class Command
   def success?
     @status && @status.success?
   end
+
+  def pid
+    @status && @status.pid
+  end
 end
