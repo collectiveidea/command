@@ -28,12 +28,49 @@ describe Command do
     let!(:command) { Command.new(stdin) }
     let(:stdout) { double(:stdout) }
     let(:stderr) { double(:stderr) }
-    let(:status) { double(:status) }
+    let(:status) { double(:status, exitstatus: 1, success?: false) }
+    let(:result) { [stdout, stderr, status] }
+
+    before do
+      Open3.stub(:capture3) { result }
+    end
 
     it "runs the given input" do
-      expect(Open3).to receive(:capture3).once.with(stdin)
+      expect(Open3).to receive(:capture3).once.with(stdin) { result }
 
       command.run
+    end
+
+    it "sets the standard output" do
+      expect {
+        command.run
+      }.to change {
+        command.stdout
+      }.from(nil).to(stdout)
+    end
+
+    it "sets the standard error" do
+      expect {
+        command.run
+      }.to change {
+        command.stdout
+      }.from(nil).to(stdout)
+    end
+
+    it "sets the status" do
+      expect {
+        command.run
+      }.to change {
+        command.status
+      }.from(nil).to(status.exitstatus)
+    end
+
+    it "sets the success" do
+      expect {
+        command.run
+      }.to change {
+        command.success?
+      }.from(nil).to(status.success?)
     end
   end
 end
