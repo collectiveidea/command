@@ -3,6 +3,7 @@ module Command
 
     attr_reader :cmd
 
+    # @param [String] cmd
     def initialize(cmd)
       @cmd = cmd
     end
