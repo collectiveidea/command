@@ -1,9 +1,9 @@
-require "coveralls"
+require 'coveralls'
 Coveralls.wear!
 
-require "command"
+require 'command'
 
-require "bundler"
+require 'bundler'
 Bundler.require(:test)
 
-Dir[File.expand_path("../support/*.rb", __FILE__)].each { |f| require f }
+Dir[File.expand_path('../support/*.rb', __FILE__)].each { |f| require f }
