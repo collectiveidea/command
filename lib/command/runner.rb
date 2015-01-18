@@ -6,7 +6,7 @@ module Command
     def run(definition)
       stdout, stderr, status = Open3.capture3(definition.cmd)
       output = {:stdout => stdout, :stderr => stderr}
-      Command::Result.new(definition.cmd, output, status)
+      Command::Result.new(output, status)
     end
 
   end

@@ -33,10 +33,6 @@ describe Command::Runner do
       it 'sets the PID' do
         expect(result.pid).to be_a(Fixnum)
       end
-
-      it 'sets the command' do
-        expect(result.cmd).to eq(cmd)
-      end
     end
 
     context 'when command fails' do

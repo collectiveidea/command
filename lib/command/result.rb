@@ -1,15 +1,11 @@
 module Command
   class Result
 
-    attr_reader :cmd
-
-    # @param [String] cmd
     # @param [Hash] output
     # @option output_streams [String] :stdout
     # @option output_streams [String] :stderr
     # @param [Process::Status] status
-    def initialize(cmd, output, status)
-      @cmd = cmd
+    def initialize(output, status)
       @output = output
       @status = status
     end
