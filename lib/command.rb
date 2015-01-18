@@ -8,7 +8,6 @@ module Command
   def self.run(cmd)
     definition = Command::Definition.new(cmd)
     definition.run
-    definition
   end
 
 end
