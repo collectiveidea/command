@@ -1,32 +1,14 @@
 require "open3"
 
-class Command
-  attr_reader :cmd, :stdout, :stderr
+require 'command/definition'
+require 'command/result'
+
+module Command
 
   def self.run(cmd)
-    new(cmd).run
+    definition = Command::Definition.new(cmd)
+    definition.run
+    definition
   end
 
-  def initialize(cmd)
-    @cmd = cmd
-  end
-
-  def run
-    @stdout, @stderr, @status = Open3.capture3(cmd)
-    self
-  end
-
-  def exitstatus
-    @status && @status.exitstatus
-  end
-
-  alias_method :status, :exitstatus
-
-  def success?
-    @status && @status.success?
-  end
-
-  def pid
-    @status && @status.pid
-  end
 end
