@@ -1,18 +1,18 @@
 require "open3"
 
 class Command
-  attr_reader :stdin, :stdout, :stderr
+  attr_reader :cmd, :stdout, :stderr
 
-  def self.run(stdin)
-    new(stdin).run
+  def self.run(cmd)
+    new(cmd).run
   end
 
-  def initialize(stdin)
-    @stdin = stdin
+  def initialize(cmd)
+    @cmd = cmd
   end
 
   def run
-    @stdout, @stderr, @status = Open3.capture3(stdin)
+    @stdout, @stderr, @status = Open3.capture3(cmd)
     self
   end
 

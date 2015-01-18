@@ -2,30 +2,30 @@ require "spec_helper"
 
 describe Command do
   describe ".run" do
-    let!(:stdin) { double(:stdin) }
+    let!(:cmd) { double(:cmd) }
     let(:command) { double(:command) }
 
     it "initializes, runs and returns a new command" do
-      expect(Command).to receive(:new).once.with(stdin) { command }
+      expect(Command).to receive(:new).once.with(cmd) { command }
       expect(command).to receive(:run).once.with(no_args) { command }
 
-      expect(Command.run(stdin)).to eq(command)
+      expect(Command.run(cmd)).to eq(command)
     end
   end
 
   describe "#initialize" do
-    let!(:stdin) { "man touch" }
+    let!(:cmd) { "man touch" }
 
-    it "sets the standard input" do
-      command = Command.new(stdin)
+    it "sets the standard cmd" do
+      command = Command.new(cmd)
 
-      expect(command.stdin).to eq(stdin)
+      expect(command.cmd).to eq(cmd)
     end
   end
 
   describe "#run" do
-    let!(:stdin) { "man touch" }
-    let!(:command) { Command.new(stdin) }
+    let!(:cmd) { "man touch" }
+    let!(:command) { Command.new(cmd) }
     let(:stdout) { double(:stdout) }
     let(:stderr) { double(:stderr) }
     let(:status) { double(:status, exitstatus: 1, success?: false, pid: 123) }
@@ -36,7 +36,7 @@ describe Command do
     end
 
     it "runs the given input" do
-      expect(Open3).to receive(:capture3).once.with(stdin) { result }
+      expect(Open3).to receive(:capture3).once.with(cmd) { result }
 
       command.run
     end
