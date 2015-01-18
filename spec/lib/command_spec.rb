@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe Command do
   describe ".run" do
-    let!(:cmd) { double(:cmd) }
+    let(:cmd) { double(:cmd) }
     let(:command) { double(:command) }
 
     it "initializes, runs and returns a new command" do
@@ -14,7 +14,7 @@ describe Command do
   end
 
   describe "#initialize" do
-    let!(:cmd) { "man touch" }
+    let(:cmd) { "man touch" }
 
     it "sets the standard cmd" do
       command = Command.new(cmd)
@@ -24,8 +24,8 @@ describe Command do
   end
 
   describe "#run" do
-    let!(:cmd) { "man touch" }
-    let!(:command) { Command.new(cmd) }
+    let(:cmd) { "man touch" }
+    let(:command) { Command.new(cmd) }
     let(:stdout) { double(:stdout) }
     let(:stderr) { double(:stderr) }
     let(:status) { double(:status, exitstatus: 1, success?: false, pid: 123) }
