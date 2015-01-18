@@ -24,37 +24,26 @@ describe Command do
   end
 
   describe "#run" do
-    let(:cmd) { "man touch" }
+    let(:cmd) { 'ruby -e "STDOUT.print \"hello\"; STDERR.print \"world\";"' }
     let(:command) { Command.new(cmd) }
     let(:stdout) { double(:stdout) }
     let(:stderr) { double(:stderr) }
     let(:status) { double(:status, exitstatus: 1, success?: false, pid: 123) }
-    let(:result) { [stdout, stderr, status] }
-
-    before do
-      Open3.stub(:capture3) { result }
-    end
-
-    it "runs the given input" do
-      expect(Open3).to receive(:capture3).once.with(cmd) { result }
-
-      command.run
-    end
 
     it "sets the standard output" do
       expect {
         command.run
       }.to change {
         command.stdout
-      }.from(nil).to(stdout)
+      }.from(nil).to('hello')
     end
 
     it "sets the standard error" do
       expect {
         command.run
       }.to change {
-        command.stdout
-      }.from(nil).to(stdout)
+        command.stderr
+      }.from(nil).to('world')
     end
 
     it "sets the exit status" do
@@ -62,7 +51,7 @@ describe Command do
         command.run
       }.to change {
         command.exitstatus
-      }.from(nil).to(status.exitstatus)
+      }.from(nil).to(0)
     end
 
     it "sets the success" do
@@ -70,7 +59,7 @@ describe Command do
         command.run
       }.to change {
         command.success?
-      }.from(nil).to(status.success?)
+      }.from(nil).to(true)
     end
 
     it "sets the PID" do
@@ -78,7 +67,7 @@ describe Command do
         command.run
       }.to change {
         command.pid
-      }.from(nil).to(status.pid)
+      }.from(nil).to be_a(Fixnum)
     end
 
     it "returns the command" do
