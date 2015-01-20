@@ -18,6 +18,10 @@ module Command
       @output[:stderr]
     end
 
+    def output
+      @output[:combined]
+    end
+
     def exitstatus
       @status.exitstatus
     end

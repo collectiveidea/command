@@ -5,7 +5,7 @@ describe Command::Runner do
   describe "#run" do
 
     context "when command exits successfully" do
-      let(:cmd) { "ruby -e 'STDOUT.print \"hello\"; STDERR.print \"world\";'" }
+      let(:cmd) { "ruby -e 'STDOUT.sync=STDERR.sync=true; STDOUT.print \"hello\"; sleep(0.01); STDERR.print \"world\";'" }
       let(:definition) { Command::Definition.new(cmd) }
       let(:runner) { Command::Runner.new }
       let(:result) { runner.run(definition) }
@@ -20,6 +20,10 @@ describe Command::Runner do
 
       it "sets the standard error" do
         expect(result.stderr).to eq("world")
+      end
+
+      it "sets the combined output" do
+        expect(result.output).to eq("helloworld")
       end
 
       it "sets the exit status" do
@@ -36,7 +40,7 @@ describe Command::Runner do
     end
 
     context "when command fails" do
-      let(:cmd) { "ruby -e 'STDOUT.print \"hello\"; STDERR.print \"world\"; exit(1);'" }
+      let(:cmd) { "ruby -e 'STDOUT.sync=STDERR.sync=true; STDOUT.print \"hello\"; sleep(0.01); STDERR.print \"world\"; exit(1);'" }
       let(:definition) { Command::Definition.new(cmd) }
       let(:runner) { Command::Runner.new }
       let(:result) { runner.run(definition) }
@@ -51,6 +55,10 @@ describe Command::Runner do
 
       it "sets the standard error" do
         expect(result.stderr).to eq("world")
+      end
+
+      it "sets the combined output" do
+        expect(result.output).to eq("helloworld")
       end
 
       it "sets the exit status" do
