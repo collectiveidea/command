@@ -36,15 +36,16 @@ Command.run("date")
 
 And that's all!
 
-*But* if you need more information about what happened, the return value is a `Command` object with all the goodies that you would expect.
+*But* if you need more information about what happened, the return value is a `Command::Result` object with all the goodies that you would expect.
 
 ```ruby
-command = Command.run("date")
-command.stdout   # => "Tue Nov 26 14:45:03 EST 2013\n"
-command.stderr   # => ""
-command.status   # => 0
-command.success? # => true
-command.pid      # => 32157
+result = Command.run("date")
+result.stdout   # => "Tue Nov 26 14:45:03 EST 2013\n"
+result.stderr   # => ""
+result.output   # => "Tue Nov 26 14:45:03 EST 2013\n" (combined stdout + stderr)
+result.status   # => 0
+result.success? # => true
+result.pid      # => 32157
 ```
 
 Now, drawing boundaries in your tests is easy.
@@ -56,7 +57,7 @@ describe DateGetter do
       date = "Tue Nov 26 14:45:03 EST 2013"
 
       expect(Command).to receive(:run).with("date") do
-        double(:command, success?: true, stdout: "#{date}\n")
+        double(:result, success?: true, stdout: "#{date}\n")
       end
 
       expect(DateGetter.get).to eq(date)
