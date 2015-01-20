@@ -1,8 +1,8 @@
-require 'open3'
+require "open3"
 
-require 'command/definition'
-require 'command/runner'
-require 'command/result'
+require "command/definition"
+require "command/runner"
+require "command/result"
 
 module Command
 
