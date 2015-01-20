@@ -42,6 +42,7 @@ And that's all!
 result = Command.run("date")
 result.stdout   # => "Tue Nov 26 14:45:03 EST 2013\n"
 result.stderr   # => ""
+result.output   # => "Tue Nov 26 14:45:03 EST 2013\n" (combined stdout + stderr)
 result.status   # => 0
 result.success? # => true
 result.pid      # => 32157
