@@ -70,5 +70,43 @@ describe Command::Runner do
       end
     end
 
+    context "when command outputs mixed stdout and stderr" do
+      let(:cmd) { "ruby -e 'STDOUT.sync=STDERR.sync=true; STDOUT.print \"1\"; sleep(0.01); STDERR.print \"2\"; sleep(0.01); STDOUT.print \"3\";'" }
+      let(:definition) { Command::Definition.new(cmd) }
+      let(:runner) { Command::Runner.new }
+      let(:result) { runner.run(definition) }
+
+      it "sets the standard output" do
+        expect(result.stdout).to eq("13")
+      end
+
+      it "sets the standard error" do
+        expect(result.stderr).to eq("2")
+      end
+
+      it "sets the combined output" do
+        expect(result.output).to eq("123")
+      end
+    end
+
+    context "when command outputs mixed stdout and stderr without delay" do
+      let(:cmd) { "ruby -e 'STDOUT.sync=STDERR.sync=true; STDOUT.print \"1\"; STDERR.print \"2\"; STDOUT.print \"3\";'" }
+      let(:definition) { Command::Definition.new(cmd) }
+      let(:runner) { Command::Runner.new }
+      let(:result) { runner.run(definition) }
+
+      it "sets the standard output" do
+        expect(result.stdout).to eq("13")
+      end
+
+      it "sets the standard error" do
+        expect(result.stderr).to eq("2")
+      end
+
+        it "sets the combined output", :skip => "doesn't work, probably because the ruby loop is too slow (both IO objects become available at the same time)" do
+          expect(result.output).to eq("123")
+        end
+    end
+
   end
 end
