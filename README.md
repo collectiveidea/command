@@ -1,5 +1,7 @@
 # Command
 
+**DEPRECATED! One of the primary goals of Command was to provide better access to the STDOUT and STDERR output of a command. The goal was to allow the running of one command to produce separate STDOUT and STDERR strings _as well as_ an accurate, combined output. Combining the output now seems impossible to do with 100% accuracy while also maintaining separate output for each stream. Expect that Command will be removed from GitHub in six months.**
+
 [![Gem Version](https://badge.fury.io/rb/command.png)](http://badge.fury.io/rb/command)
 [![Build Status](https://travis-ci.org/collectiveidea/command.png?branch=master)](https://travis-ci.org/collectiveidea/command)
 [![Code Climate](https://codeclimate.com/github/collectiveidea/command.png)](https://codeclimate.com/github/collectiveidea/command)
